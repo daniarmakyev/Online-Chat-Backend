@@ -1,14 +1,15 @@
-FROM node:18-alpine
+FROM node:18-slim
+
 
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
 
-RUN npm install --production
+RUN npm ci --only=production
 
 COPY . .
 
-ENV PORT 3012
+ENV PORT=3012
 EXPOSE 3012
 
 CMD ["node", "server.js"]
